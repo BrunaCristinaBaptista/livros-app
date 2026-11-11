@@ -1,0 +1,7 @@
+/* Ajustes próprios sobre o Bootstrap */
+.jumbotron { padding: 30px; }
+.jumbotron p { font-size: 17px; }
+.jumbotron .table { font-size: 15px; background: #fff; }
+.form-inline-remover { display: inline; margin: 0; }
+.btn-link.btn-xs { padding: 0; font-size: 15px; }
+.creditos { margin: 0 0 30px; font-size: 14px; }

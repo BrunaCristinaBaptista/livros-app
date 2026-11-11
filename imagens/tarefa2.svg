@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" font-family="Helvetica, Arial, sans-serif">
+  <title>Tarefa 2: lab-vpc com sub-redes públicas e privadas em duas Zonas de Disponibilidade</title>
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#545b64"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+
+  <ellipse cx="450" cy="38" rx="80" ry="24" fill="#f2f3f3" stroke="#545b64"/>
+  <text x="450" y="44" text-anchor="middle" font-size="15" fill="#16191f">Internet</text>
+  <line x1="450" y1="62" x2="450" y2="86" stroke="#545b64" stroke-width="1.5" marker-end="url(#seta)" marker-start="url(#seta)"/>
+
+  <rect x="40" y="100" width="820" height="480" rx="6" fill="none" stroke="#8c4fff" stroke-width="2"/>
+  <text x="56" y="126" font-size="15" font-weight="bold" fill="#8c4fff">lab-vpc · 10.0.0.0/16</text>
+  <rect x="385" y="86" width="130" height="32" rx="4" fill="#ffffff" stroke="#8c4fff" stroke-width="1.5"/>
+  <text x="450" y="107" text-anchor="middle" font-size="13" font-weight="bold" fill="#16191f">lab-igw</text>
+
+  <!-- Zona A -->
+  <rect x="65" y="145" width="375" height="330" rx="6" fill="none" stroke="#147eba" stroke-dasharray="6 4"/>
+  <text x="81" y="167" font-size="13" fill="#147eba">Zona de Disponibilidade us-east-1a</text>
+  <rect x="85" y="180" width="335" height="125" rx="4" fill="#f2f8e9" stroke="#7aa116" stroke-width="1.5"/>
+  <text x="101" y="203" font-size="14" font-weight="bold" fill="#3f6b00">Sub-rede pública 1 · 10.0.0.0/24</text>
+  <text x="101" y="221" font-size="12" fill="#545b64">lab-subnet-public1-us-east-1a</text>
+  <rect x="172" y="242" width="160" height="42" rx="4" fill="#ffffff" stroke="#7aa116"/>
+  <text x="252" y="268" text-anchor="middle" font-size="13" fill="#16191f">Gateway NAT</text>
+  <rect x="85" y="322" width="335" height="133" rx="4" fill="#eef5fb" stroke="#147eba" stroke-width="1.5"/>
+  <text x="101" y="345" font-size="14" font-weight="bold" fill="#0b4f7a">Sub-rede privada 1 · 10.0.1.0/24</text>
+  <text x="101" y="363" font-size="12" fill="#545b64">lab-subnet-private1-us-east-1a</text>
+
+  <!-- Zona B (novas sub-redes) -->
+  <rect x="460" y="145" width="375" height="330" rx="6" fill="none" stroke="#147eba" stroke-dasharray="6 4"/>
+  <text x="476" y="167" font-size="13" fill="#147eba">Zona de Disponibilidade us-east-1b</text>
+  <rect x="480" y="180" width="335" height="125" rx="4" fill="#f2f8e9" stroke="#7aa116" stroke-width="1.5"/>
+  <text x="496" y="203" font-size="14" font-weight="bold" fill="#3f6b00">Sub-rede pública 2 · 10.0.2.0/24</text>
+  <text x="496" y="221" font-size="12" fill="#545b64">lab-subnet-public2</text>
+  <text x="647" y="268" text-anchor="middle" font-size="12" fill="#ec7211" font-weight="bold">nova nesta tarefa</text>
+  <rect x="480" y="322" width="335" height="133" rx="4" fill="#eef5fb" stroke="#147eba" stroke-width="1.5"/>
+  <text x="496" y="345" font-size="14" font-weight="bold" fill="#0b4f7a">Sub-rede privada 2 · 10.0.3.0/24</text>
+  <text x="496" y="363" font-size="12" fill="#545b64">lab-subnet-private2</text>
+  <text x="647" y="410" text-anchor="middle" font-size="12" fill="#ec7211" font-weight="bold">nova nesta tarefa</text>
+
+  <!-- Tabelas de rotas -->
+  <rect x="85" y="495" width="345" height="64" rx="4" fill="#ffffff" stroke="#7aa116"/>
+  <text x="101" y="519" font-size="13" font-weight="bold" fill="#3f6b00">lab-rtb-public → lab-igw</text>
+  <text x="101" y="542" font-size="12" fill="#16191f">associada às sub-redes públicas 1 e 2</text>
+  <rect x="470" y="495" width="345" height="64" rx="4" fill="#ffffff" stroke="#147eba"/>
+  <text x="486" y="519" font-size="13" font-weight="bold" fill="#0b4f7a">lab-rtb-private1 → gateway NAT</text>
+  <text x="486" y="542" font-size="12" fill="#16191f">associada às sub-redes privadas 1 e 2</text>
+</svg>

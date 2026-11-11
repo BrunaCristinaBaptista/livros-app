@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 750" width="900" height="750" font-family="Helvetica, Arial, sans-serif">
+  <title>Arquitetura final: balanceador de carga, dois servidores web nas sub-redes públicas e banco RDS Multi-AZ nas privadas</title>
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#545b64"/>
+    </marker>
+    <marker id="seta-laranja" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#ec7211"/>
+    </marker>
+  </defs>
+  <rect width="900" height="750" fill="#ffffff"/>
+
+  <!-- Internet e API própria -->
+  <ellipse cx="450" cy="38" rx="80" ry="24" fill="#f2f3f3" stroke="#545b64"/>
+  <text x="450" y="44" text-anchor="middle" font-size="15" fill="#16191f">Internet</text>
+  <line x1="450" y1="62" x2="450" y2="106" stroke="#545b64" stroke-width="1.5" marker-end="url(#seta)"/>
+  <text x="460" y="88" font-size="12" fill="#545b64">HTTP :80</text>
+
+  <rect x="40" y="16" width="250" height="56" rx="4" fill="#fff4e6" stroke="#ec7211" stroke-width="1.5"/>
+  <text x="165" y="39" text-anchor="middle" font-size="13" font-weight="bold" fill="#16191f">API própria (Python + boto3)</text>
+  <text x="165" y="58" text-anchor="middle" font-size="12" fill="#545b64">no seu computador</text>
+  <text x="350" y="162" font-size="12" fill="#ec7211">a API cria o balanceamento (Tarefa 9)</text>
+
+  <!-- VPC -->
+  <rect x="40" y="120" width="820" height="580" rx="6" fill="none" stroke="#8c4fff" stroke-width="2"/>
+  <text x="620" y="146" font-size="15" font-weight="bold" fill="#8c4fff">lab-vpc · 10.0.0.0/16</text>
+  <rect x="385" y="106" width="130" height="30" rx="4" fill="#ffffff" stroke="#8c4fff" stroke-width="1.5"/>
+  <text x="450" y="126" text-anchor="middle" font-size="13" font-weight="bold" fill="#16191f">lab-igw</text>
+
+  <!-- Zonas -->
+  <rect x="65" y="170" width="375" height="510" rx="6" fill="none" stroke="#147eba" stroke-dasharray="6 4"/>
+  <text x="81" y="192" font-size="13" fill="#147eba">us-east-1a</text>
+  <rect x="460" y="170" width="375" height="510" rx="6" fill="none" stroke="#147eba" stroke-dasharray="6 4"/>
+  <text x="476" y="192" font-size="13" fill="#147eba">us-east-1b</text>
+
+  <!-- Sub-redes públicas -->
+  <rect x="85" y="205" width="335" height="230" rx="4" fill="#f2f8e9" stroke="#7aa116" stroke-width="1.5"/>
+  <text x="101" y="226" font-size="13" font-weight="bold" fill="#3f6b00">Sub-rede pública 1 · 10.0.0.0/24</text>
+  <rect x="480" y="205" width="335" height="230" rx="4" fill="#f2f8e9" stroke="#7aa116" stroke-width="1.5"/>
+  <text x="496" y="226" font-size="13" font-weight="bold" fill="#3f6b00">Sub-rede pública 2 · 10.0.2.0/24</text>
+
+  <!-- Balanceador (fica nas duas sub-redes públicas) -->
+  <rect x="190" y="244" width="520" height="44" rx="4" fill="#fff4e6" stroke="#ec7211" stroke-width="2"/>
+  <text x="450" y="263" text-anchor="middle" font-size="14" font-weight="bold" fill="#16191f">Balanceador de carga livros-alb</text>
+  <text x="450" y="280" text-anchor="middle" font-size="12" fill="#545b64">listener HTTP :80 → grupo de destino livros-tg</text>
+  <line x1="300" y1="288" x2="300" y2="326" stroke="#545b64" stroke-width="1.5" marker-end="url(#seta)"/>
+  <line x1="600" y1="288" x2="600" y2="326" stroke="#545b64" stroke-width="1.5" marker-end="url(#seta)"/>
+
+  <!-- Servidores web -->
+  <rect x="215" y="328" width="170" height="56" rx="4" fill="#ffffff" stroke="#7aa116" stroke-width="1.5"/>
+  <text x="300" y="351" text-anchor="middle" font-size="13" font-weight="bold" fill="#16191f">Servidor Livros 2</text>
+  <text x="300" y="370" text-anchor="middle" font-size="12" fill="#545b64">EC2 (cópia pela AMI)</text>
+  <rect x="515" y="328" width="170" height="56" rx="4" fill="#ffffff" stroke="#7aa116" stroke-width="1.5"/>
+  <text x="600" y="351" text-anchor="middle" font-size="13" font-weight="bold" fill="#16191f">Servidor Livros</text>
+  <text x="600" y="370" text-anchor="middle" font-size="12" fill="#545b64">EC2 (Tarefa 7)</text>
+  <text x="625" y="420" font-size="12" fill="#545b64">Web Security Group: HTTP :80</text>
+
+  <rect x="100" y="328" width="96" height="40" rx="4" fill="#ffffff" stroke="#7aa116"/>
+  <text x="148" y="353" text-anchor="middle" font-size="12" fill="#16191f">Gateway NAT</text>
+
+  <!-- Sub-redes privadas -->
+  <rect x="85" y="455" width="335" height="205" rx="4" fill="#eef5fb" stroke="#147eba" stroke-width="1.5"/>
+  <text x="101" y="476" font-size="13" font-weight="bold" fill="#0b4f7a">Sub-rede privada 1 · 10.0.1.0/24</text>
+  <rect x="480" y="455" width="335" height="205" rx="4" fill="#eef5fb" stroke="#147eba" stroke-width="1.5"/>
+  <text x="496" y="476" font-size="13" font-weight="bold" fill="#0b4f7a">Sub-rede privada 2 · 10.0.3.0/24</text>
+
+  <!-- Banco Multi-AZ -->
+  <rect x="190" y="545" width="150" height="56" rx="4" fill="#ffffff" stroke="#147eba" stroke-width="1.5"/>
+  <text x="265" y="568" text-anchor="middle" font-size="13" font-weight="bold" fill="#16191f">livros-db</text>
+  <text x="265" y="587" text-anchor="middle" font-size="12" fill="#545b64">RDS MySQL (principal)</text>
+  <rect x="560" y="545" width="150" height="56" rx="4" fill="#ffffff" stroke="#147eba" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="635" y="568" text-anchor="middle" font-size="13" font-weight="bold" fill="#16191f">livros-db</text>
+  <text x="635" y="587" text-anchor="middle" font-size="12" fill="#545b64">cópia (standby)</text>
+  <line x1="340" y1="573" x2="558" y2="573" stroke="#147eba" stroke-dasharray="5 3" marker-end="url(#seta)"/>
+  <text x="449" y="565" text-anchor="middle" font-size="12" fill="#0b4f7a">replicação Multi-AZ</text>
+
+  <!-- Servidores → banco -->
+  <path d="M300 384 V543" fill="none" stroke="#545b64" stroke-width="1.5" marker-end="url(#seta)"/>
+  <path d="M600 384 V515 H320 V543" fill="none" stroke="#545b64" stroke-width="1.5" marker-end="url(#seta)"/>
+  <text x="625" y="628" font-size="12" fill="#545b64">DB Security Group: MySQL :3306</text>
+  <text x="625" y="645" font-size="12" fill="#545b64">só dos servidores web</text>
+  <text x="450" y="728" text-anchor="middle" font-size="13" fill="#16191f">Os dois servidores usam o mesmo banco: os livros são os mesmos em qualquer um deles.</text>
+  <!-- Seta da API por cima de tudo -->
+  <path d="M290 44 H340 V242" fill="none" stroke="#ec7211" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#seta-laranja)"/>
+</svg>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Livros Recomendados · README</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root { --laranja: #ec7211; --laranja-escuro: #eb5f07; --azul-console: #232f3e; --texto: #16191f;
+            --borda: #d5dbdb; --fundo-codigo: #f2f3f3; --link: #0073bb; }
+    body { font-family: "Amazon Ember", "Helvetica Neue", Roboto, Arial, sans-serif; color: var(--texto);
+           max-width: 920px; margin: 0 auto; padding: 24px 20px 60px; line-height: 1.6; font-size: 15px; }
+    h1 { font-size: 28px; border-bottom: 3px solid var(--laranja); padding-bottom: 8px; }
+    h2 { font-size: 22px; margin-top: 40px; padding-bottom: 6px; border-bottom: 1px solid var(--borda); }
+    a { color: var(--link); }
+    hr { border: 0; border-top: 1px solid var(--borda); margin: 36px 0; }
+    li { margin: 6px 0; }
+    li > p { margin: 6px 0; }
+    code { background: var(--fundo-codigo); border: 1px solid #e1e4e5; border-radius: 3px; padding: 1px 5px;
+           font-family: Menlo, Consolas, "Courier New", monospace; font-size: 13.5px; color: #c7254e; }
+    table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 14px; }
+    th, td { border: 1px solid var(--borda); padding: 7px 10px; text-align: left; vertical-align: top; }
+    th { background: #fafafa; }
+    img { max-width: 100%; border: 1px solid var(--borda); border-radius: 4px; }
+
+    /* Botões do console */
+    .botao { display: inline-block; padding: 1px 12px; border-radius: 2px; font-weight: 700; font-size: 13.5px;
+             line-height: 22px; white-space: nowrap; vertical-align: baseline; }
+    .botao.laranja { background: var(--laranja); border: 1px solid var(--laranja-escuro); color: #fff; }
+    .botao.branco { background: #fff; border: 1px solid #545b64; color: #545b64; }
+
+    /* Caixa "Serviços" da barra do console */
+    .servicos { display: inline-block; background: var(--azul-console); color: #fff; padding: 1px 10px;
+                border-radius: 3px; font-weight: 700; font-size: 13.5px; white-space: nowrap; }
+
+    /* Ícones dentro do texto */
+    li i.far, li i.fas { color: var(--link); }
+    .servicos i { color: #fff !important; }
+
+    /* Notas (dicas, alertas e informações) */
+    .nota { background: #f1faff; border-left: 4px solid var(--link); padding: 8px 12px; border-radius: 0 4px 4px 0; }
+    .nota i.fa-exclamation-triangle { color: #d13212; }
+    .nota:has(.fa-exclamation-triangle) { background: #fff8f6; border-left-color: #d13212; }
+
+    /* Blocos de código */
+    .codigo { position: relative; }
+    pre { background: var(--azul-console); color: #f8f8f8; padding: 14px 16px; border-radius: 4px; overflow-x: auto;
+          font-size: 13.5px; line-height: 1.5; }
+    pre code { background: none; border: 0; color: inherit; padding: 0; }
+    .copiar { position: absolute; top: 8px; right: 8px; background: #fff; border: 1px solid var(--borda);
+              border-radius: 3px; font-size: 12px; padding: 2px 8px; cursor: pointer; }
+
+    @media (max-width: 600px) { body { padding: 16px; } .botao, .servicos { white-space: normal; } }
+  </style>
+</head>
+<body>
+<h1 id="livros-recomendados-vm-aplicação-web-e-banco-de-dados-na-aws">Livros Recomendados: VM, aplicação web e banco de dados na AWS</h1>
+<p><strong>Elaborado por Bruna Cristina Kato Baptista e Elizeu Elias Ribeiro</strong></p>
+<p>Projeto final da disciplina Fundamentos de Computação em Nuvem.</p>
+<h2 id="visão-geral-e-objetivos">Visão geral e objetivos</h2>
+<p>Neste projeto, você criará uma VPC própria, um banco de dados MySQL no Amazon RDS e um servidor web no Amazon EC2 com a aplicação <strong>Livros Recomendados</strong>. Em seguida, uma <strong>API própria</strong> colocará um balanceador de carga na frente de dois servidores.</p>
+<p>O projeto junta o que foi feito nos laboratórios:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Parte do projeto</th>
+<th>Laboratório de referência</th>
+<th>Tarefas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Máquina virtual + página web</td>
+<td>Lab 2 (VPC e servidor web) e Lab 3 (EC2)</td>
+<td>1, 2, 3 e 7</td>
+</tr>
+<tr class="even">
+<td>2. Banco de dados</td>
+<td>Lab 5 (RDS)</td>
+<td>4, 5, 6 e 8</td>
+</tr>
+<tr class="odd">
+<td>3. Balanceamento de carga, por uma API própria</td>
+<td>Lab 6 (ELB)</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<p>Depois de concluir o projeto, você será capaz de:</p>
+<ul>
+<li>Criar uma VPC com sub-redes públicas e privadas em duas Zonas de Disponibilidade.</li>
+<li>Configurar grupos de segurança para o servidor web e para o banco de dados.</li>
+<li>Executar um banco de dados Amazon RDS Multi-AZ.</li>
+<li>Executar um servidor web com um script de dados do usuário que baixa a aplicação.</li>
+<li>Conectar a aplicação ao banco e cadastrar livros.</li>
+<li>Criar um balanceador de carga usando uma API própria, que envia comandos para a AWS.</li>
+</ul>
+<h2 id="duração">Duração</h2>
+<p>O projeto leva aproximadamente <strong>60 minutos</strong>, contando as esperas do banco de dados e do balanceador.</p>
+<h2 id="restrições-de-serviço-da-aws">Restrições de serviço da AWS</h2>
+<p>No ambiente do Learner Lab, alguns serviços e ações podem estar restritos. Se aparecer um erro de permissão, confira se a região é <strong>Norte da Virgínia (us-east-1)</strong> e se os tipos escolhidos são <strong>t2.micro</strong> (EC2) e <strong>db.t3.micro</strong> (RDS).</p>
+<h2 id="arquitetura-final">Arquitetura final</h2>
+<p><img width="800" src="imagens/arquitetura.svg" alt="Arquitetura" /></p>
+<hr />
+<h2 id="preparação-publicar-a-aplicação-no-github">Preparação: publicar a aplicação no GitHub</h2>
+<p>O servidor web baixará a aplicação de um repositório público no GitHub, assim como no Lab 2 o servidor baixa o <code>lab-app.zip</code>.</p>
+<ol type="1">
+<li><p>Acesse <a href="https://github.com">https://github.com</a> e escolha <span class="botao laranja">New repository</span>.</p>
+<ul>
+<li><strong>Repository name:</strong> <code>livros-app</code></li>
+<li>Selecione <i class="far fa-dot-circle"></i> <strong>Public</strong>.</li>
+<li>Escolha <span class="botao laranja">Create repository</span>.</li>
+</ul></li>
+<li><p>Selecione <strong>uploading an existing file</strong> e arraste os arquivos e as pastas desta aplicação (<code>index.php</code>, <code>rds.php</code>, as pastas <code>sql</code> e <code>css</code> etc.). Escolha <span class="botao laranja">Commit changes</span>.</p></li>
+<li><p>Confirme que o download funciona abrindo no navegador: <code>https://github.com/SEU-USUARIO/livros-app/archive/refs/heads/main.zip</code></p>
+<p class="nota"><i class="fas fa-info-circle"></i> O repositório pode ser público porque não contém nenhuma senha: a conexão com o banco é informada na página RDS da aplicação (Tarefa 8) e fica gravada somente dentro do servidor.</p></li>
+</ol>
+<h2 id="acessar-o-console-de-gerenciamento-da-aws">Acessar o Console de Gerenciamento da AWS</h2>
+<ol start="4" type="1">
+<li><p>No Learner Lab, escolha <span class="botao laranja">Start Lab</span> e aguarde até o ícone ao lado de <strong>AWS</strong> ficar verde.</p></li>
+<li><p>Escolha <strong>AWS</strong> para abrir o console em uma nova guia.</p></li>
+</ol>
+<p class="nota"><i class="fas fa-comment"></i> <strong>Dica:</strong> os valores que aparecem <code>neste formato</code> devem ser digitados exatamente como estão.</p>
+<hr />
+<h2 id="tarefa-1-criar-a-vpc">Tarefa 1: Criar a VPC</h2>
+<p>Nesta tarefa, você usará a opção <em>VPC e muito mais</em> no console da VPC para criar vários recursos de uma vez: uma <em>VPC</em>, um <em>gateway de internet</em>, uma <em>sub-rede pública</em> e uma <em>sub-rede privada</em> em uma Zona de Disponibilidade, duas <em>tabelas de rotas</em> e um <em>gateway NAT</em>.</p>
+<ol start="6" type="1">
+<li><p>Na caixa de pesquisa à direita de <span class="servicos"><i class="fas fa-th"></i><span> Services </span></span>, procure e selecione <strong>VPC</strong>.</p></li>
+<li><p>Comece a criar a VPC.</p>
+<ul>
+<li>No canto superior direito, confirme se a região é <strong>Norte da Virgínia (us-east-1)</strong>.</li>
+<li>Selecione <strong>Painel da VPC</strong> e depois <span class="botao laranja">Criar VPC</span>.</li>
+</ul></li>
+<li><p>Configure os detalhes no painel <em>Configurações da VPC</em>:</p>
+<ul>
+<li>Escolha <strong>VPC e muito mais</strong>.</li>
+<li>Em <strong>Geração automática da etiqueta de nome</strong>, mantenha <em>Gerar automaticamente</em> e altere o valor para <code>lab</code>.</li>
+<li>Mantenha <strong>Bloco CIDR IPv4</strong> como <code>10.0.0.0/16</code>.</li>
+<li><strong>Número de zonas de disponibilidade:</strong> <strong>1</strong></li>
+<li><strong>Número de sub-redes públicas:</strong> <strong>1</strong></li>
+<li><strong>Número de sub-redes privadas:</strong> <strong>1</strong></li>
+<li>Expanda <strong>Personalizar blocos CIDR de sub-redes</strong>:
+<ul>
+<li><strong>Public subnet CIDR block in us-east-1a:</strong> <code>10.0.0.0/24</code></li>
+<li><strong>Private subnet CIDR block in us-east-1a:</strong> <code>10.0.1.0/24</code></li>
+</ul></li>
+<li><strong>Gateways NAT:</strong> <strong>In 1 AZ</strong></li>
+<li><strong>Endpoints da VPC:</strong> <strong>Nenhum</strong></li>
+<li>Mantenha <strong>Nomes de host DNS</strong> e <strong>Resolução de DNS</strong> ativados.</li>
+</ul></li>
+<li><p>No painel <em>Visualização</em>, confirme os nomes: <code>lab-vpc</code>, <code>lab-subnet-public1-us-east-1a</code>, <code>lab-subnet-private1-us-east-1a</code>, <code>lab-rtb-public</code>, <code>lab-rtb-private1-us-east-1a</code>, <code>lab-igw</code> e <code>lab-nat-public1-us-east-1a</code>.</p></li>
+<li><p>Escolha <span class="botao laranja">Criar VPC</span> e aguarde até que <em>todos</em> os recursos sejam criados. O gateway NAT leva alguns minutos.</p></li>
+<li><p>Escolha <span class="botao laranja">Visualizar VPC</span>.</p>
+<p>O <em>gateway de internet</em> permite a comunicação entre a VPC e a internet. A sub-rede pública <code>lab-subnet-public1-us-east-1a</code> (<strong>10.0.0.x</strong>) é pública porque a tabela de rotas dela envia o tráfego <code>0.0.0.0/0</code> para o gateway de internet.</p>
+<p>O <em>gateway NAT</em> permite que recursos nas sub-redes <em>privadas</em> acessem a internet sem receber conexões vindas dela. A sub-rede privada <code>lab-subnet-private1-us-east-1a</code> contém os endereços <strong>10.0.1.x</strong>.</p>
+<p><img width="800" src="imagens/tarefa1.svg" alt="Tarefa 1" /></p></li>
+</ol>
+<h2 id="tarefa-2-criar-sub-redes-adicionais">Tarefa 2: Criar sub-redes adicionais</h2>
+<p>Nesta tarefa, você criará uma segunda sub-rede pública e uma segunda sub-rede privada em outra Zona de Disponibilidade. O banco de dados exige sub-redes em duas zonas, e o balanceador de carga também.</p>
+<ol start="12" type="1">
+<li><p>No painel de navegação à esquerda, escolha <strong>Sub-redes</strong>.</p></li>
+<li><p>Selecione <span class="botao laranja">Criar sub-rede</span> e configure:</p>
+<ul>
+<li><strong>ID da VPC:</strong> <strong>lab-vpc</strong></li>
+<li><strong>Nome da sub-rede:</strong> <code>lab-subnet-public2</code></li>
+<li><strong>Zona de Disponibilidade:</strong> a <em>segunda</em> zona (por exemplo, us-east-1b)</li>
+<li><strong>Bloco CIDR IPv4:</strong> <code>10.0.2.0/24</code></li>
+</ul></li>
+<li><p>Escolha <span class="botao laranja">Criar sub-rede</span>.</p></li>
+<li><p>Selecione <span class="botao laranja">Criar sub-rede</span> novamente e configure:</p>
+<ul>
+<li><strong>ID da VPC:</strong> <code>lab-vpc</code></li>
+<li><strong>Nome da sub-rede:</strong> <code>lab-subnet-private2</code></li>
+<li><strong>Zona de Disponibilidade:</strong> a <em>segunda</em> zona (por exemplo, us-east-1b)</li>
+<li><strong>Bloco CIDR IPv4:</strong> <code>10.0.3.0/24</code></li>
+</ul></li>
+<li><p>Escolha <span class="botao laranja">Criar sub-rede</span>.</p>
+<p>Agora, você associará cada nova sub-rede à tabela de rotas certa. Uma <em>tabela de rotas</em> contém as regras que definem para onde o tráfego de rede é enviado.</p></li>
+<li><p>No painel de navegação à esquerda, selecione <strong>Tabelas de rotas</strong>.</p></li>
+<li><p>Selecione a tabela <i class="far fa-check-square"></i> <strong>lab-rtb-private1-us-east-1a</strong> e, no painel inferior, a guia <strong>Rotas</strong>.</p>
+<p>O destino <code>0.0.0.0/0</code> aponta para <strong>nat-xxxxxxxx</strong>: o tráfego para a internet sai pelo gateway NAT.</p></li>
+<li><p>Escolha a guia <strong>Associações de sub-rede</strong> → <span class="botao branco">Editar associações de sub-rede</span>.</p></li>
+<li><p>Mantenha <strong>lab-subnet-private1-us-east-1a</strong> selecionada, selecione também <i class="far fa-check-square"></i> <strong>lab-subnet-private2</strong> e escolha <span class="botao laranja">Salvar associações</span>.</p></li>
+<li><p>Selecione a tabela <i class="far fa-check-square"></i> <strong>lab-rtb-public</strong> (desmarque as demais) e confira na guia <strong>Rotas</strong> que <code>0.0.0.0/0</code> aponta para <strong>igw-xxxxxxxx</strong>, o gateway de internet.</p></li>
+<li><p>Na guia <strong>Associações de sub-rede</strong>, escolha <span class="botao branco">Editar associações de sub-rede</span>.</p></li>
+<li><p>Mantenha <strong>lab-subnet-public1-us-east-1a</strong> selecionada, selecione também <i class="far fa-check-square"></i> <strong>lab-subnet-public2</strong> e escolha <span class="botao laranja">Salvar associações</span>.</p>
+<p>A VPC agora tem sub-redes públicas e privadas em duas Zonas de Disponibilidade.</p>
+<p><img width="800" src="imagens/tarefa2.svg" alt="Tarefa 2" /></p></li>
+</ol>
+<h2 id="tarefa-3-criar-o-grupo-de-segurança-do-servidor-web">Tarefa 3: Criar o grupo de segurança do servidor web</h2>
+<p>Nesta tarefa, você criará um grupo de segurança, que atua como um firewall virtual, permitindo acesso HTTP aos servidores web.</p>
+<ol start="24" type="1">
+<li><p>No painel de navegação à esquerda, escolha <strong>Grupos de segurança</strong>.</p></li>
+<li><p>Selecione <span class="botao laranja">Criar grupo de segurança</span> e configure:</p>
+<ul>
+<li><strong>Nome do grupo de segurança:</strong> <code>Web Security Group</code></li>
+<li><strong>Descrição:</strong> <code>Enable HTTP access</code></li>
+<li><strong>VPC:</strong> selecione o X para remover a VPC selecionada e escolha <strong>lab-vpc</strong>.</li>
+</ul></li>
+<li><p>Em <strong>Regras de entrada</strong>, selecione <span class="botao branco">Adicionar regra</span> e configure:</p>
+<ul>
+<li><strong>Tipo:</strong> <em>HTTP</em></li>
+<li><strong>Origem:</strong> <em>Anywhere-IPv4</em></li>
+<li><strong>Descrição:</strong> <code>Permit web requests</code></li>
+</ul></li>
+<li><p>Escolha <span class="botao laranja">Criar grupo de segurança</span>.</p></li>
+</ol>
+<h2 id="tarefa-4-criar-o-grupo-de-segurança-do-banco-de-dados">Tarefa 4: Criar o grupo de segurança do banco de dados</h2>
+<p>Nesta tarefa, você criará o grupo de segurança do banco, permitindo conexões <strong>somente</strong> dos servidores que estão no Web Security Group. Ele precisa ser criado depois do Web Security Group, porque aponta para ele.</p>
+<ol start="28" type="1">
+<li><p>Em <strong>Grupos de segurança</strong>, selecione <span class="botao laranja">Criar grupo de segurança</span> e configure:</p>
+<ul>
+<li><strong>Nome do grupo de segurança:</strong> <code>DB Security Group</code></li>
+<li><strong>Descrição:</strong> <code>Permit access from Web Security Group</code></li>
+<li><strong>VPC:</strong> <strong>lab-vpc</strong></li>
+</ul></li>
+<li><p>Em <strong>Regras de entrada</strong>, selecione <span class="botao branco">Adicionar regra</span> e configure:</p>
+<ul>
+<li><strong>Tipo:</strong> <em>MySQL/Aurora (3306)</em></li>
+<li><strong>Origem:</strong> clique no campo ao lado de <em>Personalizado</em>, digite <code>sg</code> e selecione <em>Web Security Group</em>.</li>
+</ul>
+<p>Essa regra permite tráfego na porta 3306 apenas de instâncias associadas ao <em>Web Security Group</em>. Nenhum outro endereço da internet consegue se conectar ao banco.</p></li>
+<li><p>Escolha <span class="botao laranja">Criar grupo de segurança</span>.</p></li>
+</ol>
+<h2 id="tarefa-5-criar-um-grupo-de-sub-redes-do-banco-de-dados">Tarefa 5: Criar um grupo de sub-redes do banco de dados</h2>
+<p>Nesta tarefa, você criará um <em>DB subnet group</em>, que informa ao RDS em quais sub-redes o banco pode ficar. Cada grupo exige sub-redes em pelo menos duas Zonas de Disponibilidade.</p>
+<ol start="31" type="1">
+<li><p>Na caixa de pesquisa à direita de <span class="servicos"><i class="fas fa-th"></i><span> Services </span></span>, procure e selecione <strong>RDS</strong>.</p></li>
+<li><p>No painel de navegação à esquerda, escolha <strong>Grupos de sub-redes</strong>.</p></li>
+<li><p>Escolha <span class="botao laranja">Criar grupo de sub-redes de banco de dados</span> e configure:</p>
+<ul>
+<li><strong>Nome:</strong> <code>DB-Subnet-Group</code></li>
+<li><strong>Descrição:</strong> <code>DB Subnet Group</code></li>
+<li><strong>VPC:</strong> <strong>lab-vpc</strong></li>
+</ul></li>
+<li><p>Em <strong>Adicionar sub-redes</strong>:</p>
+<ul>
+<li><strong>Zonas de disponibilidade:</strong> selecione <strong>us-east-1a</strong> e <strong>us-east-1b</strong>.</li>
+<li><strong>Sub-redes:</strong> selecione as sub-redes privadas <strong>10.0.1.0/24</strong> e <strong>10.0.3.0/24</strong>.</li>
+</ul></li>
+<li><p>Escolha <span class="botao laranja">Criar</span>.</p></li>
+</ol>
+<h2 id="tarefa-6-criar-a-instância-de-banco-de-dados-do-amazon-rds">Tarefa 6: Criar a instância de banco de dados do Amazon RDS</h2>
+<p>Nesta tarefa, você criará um banco MySQL <strong>Multi-AZ</strong>. O RDS mantém uma instância principal e uma cópia sincronizada (<em>standby</em>) em outra Zona de Disponibilidade. Se a principal falhar, o RDS passa a usar a cópia.</p>
+<ol start="36" type="1">
+<li><p>No painel de navegação à esquerda, escolha <strong>Bancos de dados</strong> e depois <span class="botao laranja">Criar banco de dados</span>.</p></li>
+<li><p>Em <strong>Opções do mecanismo</strong>, selecione <i class="far fa-dot-circle"></i> <strong>MySQL</strong>.</p></li>
+<li><p>Em <strong>Modelos</strong>, escolha <strong>Dev/Test</strong>.</p></li>
+<li><p>Em <strong>Disponibilidade e durabilidade</strong>, escolha <i class="far fa-dot-circle"></i> <strong>Instância de banco de dados Multi-AZ</strong>.</p></li>
+<li><p>Em <strong>Configurações</strong>:</p>
+<ul>
+<li><strong>Identificador da instância de banco de dados:</strong> <code>livros-db</code></li>
+<li><strong>Nome de usuário principal:</strong> <code>main</code></li>
+<li><strong>Senha principal</strong> e <strong>Confirmar senha:</strong> uma senha sua, com letras e números. Anote: ela será usada na Tarefa 8.</li>
+</ul></li>
+<li><p>Em <strong>Configuração da instância</strong>, selecione <i class="far fa-dot-circle"></i> <strong>Classes com capacidade de intermitência</strong> e <em>db.t3.micro</em>.</p></li>
+<li><p>Em <strong>Armazenamento</strong>: <strong>Tipo de armazenamento</strong> <em>SSD de uso geral</em> e <strong>Armazenamento alocado</strong> <code>20</code>.</p></li>
+<li><p>Em <strong>Conectividade</strong>:</p>
+<ul>
+<li><strong>Nuvem privada virtual (VPC):</strong> <strong>lab-vpc</strong></li>
+<li><strong>Grupo de sub-redes de banco de dados:</strong> <em>db-subnet-group</em></li>
+<li><strong>Acesso público:</strong> <em>Não</em></li>
+<li><strong>Grupos de segurança de VPC existentes:</strong> escolha <em>DB Security Group</em> e remova o <em>default</em>.</li>
+</ul></li>
+<li><p>Em <strong>Monitoramento</strong>, desmarque <strong>Habilitar o monitoramento avançado</strong>.</p></li>
+<li><p>Em <strong>Configuração adicional</strong>:</p>
+<ul>
+<li><strong>Nome do banco de dados inicial:</strong> <code>livrosdb</code></li>
+<li>Desmarque <strong>Habilitar backups automatizados</strong>.</li>
+<li>Desmarque <strong>Habilitar criptografia</strong>.</li>
+</ul></li>
+<li><p>Escolha <span class="botao laranja">Criar banco de dados</span>.</p>
+<p class="nota"><i class="fas fa-exclamation-triangle"></i> Se aparecer um erro com <em>iam:CreateRole</em>, confira se o monitoramento avançado foi desmarcado.</p></li>
+<li><p>Escolha <strong>livros-db</strong> e aguarde o status mudar para <strong>Disponível</strong> (cerca de 10 minutos, por ser Multi-AZ).</p></li>
+<li><p>Na seção <strong>Conectividade e segurança</strong>, copie o <strong>Endpoint</strong> (algo como <code>livros-db.xxxx.us-east-1.rds.amazonaws.com</code>) e guarde em um editor de texto.</p></li>
+</ol>
+<p class="nota"><i class="fas fa-info-circle"></i> Enquanto o banco é criado, você pode fazer a Tarefa 7.</p>
+<h2 id="tarefa-7-executar-o-servidor-web">Tarefa 7: Executar o servidor web</h2>
+<p>Nesta tarefa, você executará uma instância do EC2 na sub-rede pública. Um script de dados do usuário instalará o Apache e o PHP e baixará a aplicação do GitHub, como no Lab 2.</p>
+<ol start="49" type="1">
+<li><p>Na caixa de pesquisa à direita de <span class="servicos"><i class="fas fa-th"></i><span> Services </span></span>, procure e selecione <strong>EC2</strong>.</p></li>
+<li><p>No menu <span class="botao laranja">Executar instância</span>, selecione <span class="botao laranja">Executar instância</span>.</p></li>
+<li><p>Dê o nome <code>Servidor Livros</code>.</p></li>
+<li><p>Em <strong>AMI</strong>, mantenha <strong>Amazon Linux</strong> e <strong>Amazon Linux 2023 AMI</strong>.</p></li>
+<li><p>Em <strong>Tipo de instância</strong>, mantenha <strong>t2.micro</strong>.</p></li>
+<li><p>Em <strong>Nome do par de chaves</strong>, selecione <strong>vockey</strong>.</p></li>
+<li><p>Ao lado de <strong>Configurações de rede</strong>, selecione <span class="botao branco">Editar</span> e configure:</p>
+<ul>
+<li><strong>Rede:</strong> <em>lab-vpc</em></li>
+<li><strong>Sub-rede:</strong> <em>lab-subnet-public2</em> (<em>não</em> a privada)</li>
+<li><strong>Atribuir IP público automaticamente:</strong> <em>Ativar</em></li>
+<li><strong>Firewall (grupos de segurança):</strong> <i class="far fa-dot-circle"></i> <strong>Selecionar grupo de segurança existente</strong> → <strong>Web Security Group</strong></li>
+</ul></li>
+<li><p>Mantenha o armazenamento padrão.</p></li>
+<li><p>Expanda <strong>Detalhes avançados</strong> e cole o script abaixo em <strong>Dados do usuário</strong>, trocando <code>SEU-USUARIO</code> pelo seu usuário do GitHub:</p>
+<div class="sourceCode" id="cb1"><div class="codigo"><button class="copiar" type="button">Copiar</button><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Apache Web Server and PHP</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dnf</span> install <span class="at">-y</span> httpd wget unzip php php-mysqli</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Download app files</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/SEU-USUARIO/livros-app/archive/refs/heads/main.zip</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> main.zip</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> livros-app-main/<span class="pp">*</span> /var/www/html/</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Config file for the RDS form (outside the public folder)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> /var/www/livros-config.php</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> apache:apache /var/www/livros-config.php</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 /var/www/livros-config.php</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn on web server</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">chkconfig</span> httpd on</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">service</span> httpd start</span></code></pre></div></div>
+<p>O script roda como usuário raiz, uma única vez, quando a instância é criada. Ele instala o servidor web e o PHP com suporte a MySQL, baixa a aplicação, prepara o arquivo onde a conexão com o banco será gravada e liga o servidor web.</p></li>
+<li><p>Escolha <span class="botao laranja">Executar instância</span> e depois <span class="botao laranja">Visualizar todas as instâncias</span>.</p></li>
+<li><p>Aguarde o <strong>Servidor Livros</strong> mostrar <em>2/2 verificações aprovadas</em>.</p></li>
+<li><p>Selecione o <i class="far fa-check-square"></i> <strong>Servidor Livros</strong> e copie o <strong>Endereço IPv4 público</strong> na guia <strong>Detalhes</strong>.</p></li>
+<li><p>Abra uma nova guia, digite <code>http://</code> seguido do IP público e pressione Enter. Use <strong>http</strong>, não https.</p>
+<p>A página mostra o <strong>Instance ID</strong>, a <strong>Availability Zone</strong> e a carga da CPU do servidor.</p></li>
+</ol>
+<h2 id="tarefa-8-conectar-a-aplicação-ao-banco-de-dados">Tarefa 8: Conectar a aplicação ao banco de dados</h2>
+<p>Nesta tarefa, você conectará a aplicação ao banco criado na Tarefa 6, como na Tarefa 4 do Lab 5.</p>
+<ol start="62" type="1">
+<li><p>Na página da aplicação, escolha <strong>RDS</strong> no menu.</p></li>
+<li><p>Preencha:</p>
+<ul>
+<li><strong>Endpoint:</strong> o endpoint copiado na Tarefa 6</li>
+<li><strong>Database:</strong> <code>livrosdb</code></li>
+<li><strong>Username:</strong> <code>main</code></li>
+<li><strong>Password:</strong> a senha definida na Tarefa 6</li>
+</ul>
+<p>Escolha <span class="botao laranja">Submit</span>.</p>
+<p>A aplicação testa a conexão, executa o script <code>sql/livros.sql</code> (que cria as tabelas e cadastra 9 livros iniciais) e grava a configuração. Em 5 segundos, abre a lista de <strong>Livros recomendados</strong>.</p></li>
+<li><p>Teste a aplicação: escolha <strong>Adicionar livro</strong>, <span class="botao branco">Editar</span> e <strong>Remover</strong>.</p>
+<p>Os dados ficam no banco RDS, e não no servidor. A cópia Multi-AZ é atualizada automaticamente na segunda Zona de Disponibilidade.</p></li>
+</ol>
+<h2 id="tarefa-9-criar-o-balanceamento-de-carga-com-a-api-própria">Tarefa 9: Criar o balanceamento de carga com a API própria</h2>
+<p>Nesta tarefa, uma <strong>API própria</strong>, escrita em Python (Flask + boto3), enviará os comandos para a AWS montar o balanceamento de carga, como no Lab 6. A API está na pasta <code>api-balanceamento</code>.</p>
+<ol start="65" type="1">
+<li><p>No seu computador, configure as credenciais: no Learner Lab, abra <strong>AWS Details</strong> → <strong>AWS CLI: Show</strong> e cole o conteúdo em <code>~/.aws/credentials</code>.</p></li>
+<li><p>Instale e ligue a API:</p>
+<div class="sourceCode" id="cb2"><div class="codigo"><button class="copiar" type="button">Copiar</button><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> api-balanceamento</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> api_balanceamento.py</span></code></pre></div></div></li>
+<li><p>Em outro terminal, envie o pedido:</p>
+<div class="sourceCode" id="cb3"><div class="codigo"><button class="copiar" type="button">Copiar</button><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST http://localhost:5000/balanceamento</span></code></pre></div></div>
+<p>A API executa cinco passos (de 8 a 12 minutos):</p>
+<ol type="1">
+<li>Cria uma AMI (cópia do disco) do <strong>Servidor Livros</strong>.</li>
+<li>Cria o <strong>Servidor Livros 2</strong> a partir da AMI, na outra sub-rede pública.</li>
+<li>Cria o grupo de destino <code>livros-tg</code>, com verificação de saúde na página inicial.</li>
+<li>Cria o balanceador <code>livros-alb</code> nas duas sub-redes públicas, com um listener na porta 80.</li>
+<li>Registra os dois servidores e aguarda os dois ficarem <em>healthy</em>.</li>
+</ol>
+<p class="nota"><i class="fas fa-info-circle"></i> Durante o passo 1, o Servidor Livros reinicia por cerca de 1 minuto.</p></li>
+<li><p>Abra a <strong>url</strong> devolvida pela API e atualize a página algumas vezes. O <strong>Instance ID</strong> alterna entre os dois servidores, e a lista de livros na página <strong>RDS</strong> é a mesma nos dois, porque eles usam o mesmo banco.</p></li>
+<li><p>Consulte a saúde dos servidores:</p>
+<div class="sourceCode" id="cb4"><div class="codigo"><button class="copiar" type="button">Copiar</button><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://localhost:5000/status</span></code></pre></div></div></li>
+<li><p>Teste a alta disponibilidade: no console do EC2, selecione <strong>Servidor Livros 2</strong> → <strong>Estado da instância</strong> → <strong>Interromper instância</strong>. Em até 30 segundos, o <code>/status</code> mostra esse servidor como <em>unhealthy</em>, e a aplicação continua no ar pelo outro servidor.</p></li>
+</ol>
+<h2 id="limpeza">Limpeza</h2>
+<p>O balanceador, o gateway NAT e o banco Multi-AZ consomem crédito do Learner Lab enquanto existirem.</p>
+<ol start="71" type="1">
+<li><p>Desfaça o balanceamento: <code>curl -X DELETE http://localhost:5000/balanceamento</code></p></li>
+<li><p>No EC2, encerre o <strong>Servidor Livros</strong>.</p></li>
+<li><p>No RDS, exclua o <strong>livros-db</strong> (desmarque <em>Criar snapshot final</em>) e, depois, o <strong>DB-Subnet-Group</strong>.</p></li>
+<li><p>Na VPC, exclua o <strong>DB Security Group</strong> e depois o <strong>Web Security Group</strong>.</p></li>
+<li><p>Exclua o gateway NAT (<strong>Gateways NAT</strong>) e libere o <strong>IP elástico</strong> dele.</p></li>
+<li><p>Exclua a <strong>lab-vpc</strong> (<strong>Suas VPCs</strong> → <strong>Ações</strong> → <strong>Excluir VPC</strong>).</p></li>
+</ol>
+<hr />
+<h2 id="estrutura-da-aplicação">Estrutura da aplicação</h2>
+<div class="codigo"><button class="copiar" type="button">Copiar</button><pre><code>livros-app/
+├── index.php            # página inicial: Instance ID, zona e carga da CPU
+├── load.php             # Load Test
+├── rds.php              # decide: formulário de conexão ou lista de livros
+├── rds-config.php       # formulário Endpoint / Database / Username / Password
+├── rds-write-config.php # testa a conexão, executa o sql/livros.sql e grava a configuração
+├── rds-livros.php       # lista de livros (adicionar, editar, remover)
+├── comum.php            # funções usadas por todas as páginas
+├── menu.php             # menu do topo
+├── sql/livros.sql       # cria as tabelas (livros e créditos) e cadastra 9 livros iniciais
+├── css/style.css
+└── user-data.sh         # script de dados do usuário (Tarefa 7)</code></pre></div>
+<p>Os códigos dos livros iniciais no <code>sql/livros.sql</code> são exemplos no formato de número de chamada. Substitua pelos códigos reais do catálogo da biblioteca.</p>
+<h2 id="diferenças-em-relação-à-aplicação-do-laboratório">Diferenças em relação à aplicação do laboratório</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Na aplicação do laboratório</th>
+<th>Nesta aplicação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>O texto digitado entra direto no SQL (SQL injection)</td>
+<td>Prepared statements (<code>prepare</code> + <code>bind_param</code>)</td>
+</tr>
+<tr class="even">
+<td>Os dados são exibidos sem escapar (XSS)</td>
+<td><code>htmlspecialchars</code> em tudo o que é exibido</td>
+</tr>
+<tr class="odd">
+<td>Remover é um link (<code>?mode=remove&amp;id=3</code>)</td>
+<td>Remover é um botão (POST)</td>
+</tr>
+<tr class="even">
+<td>A senha do banco fica em <code>/var/www/html</code> (pasta pública)</td>
+<td>Em <code>/var/www/livros-config.php</code>, fora da pasta pública, com <code>chmod 600</code></td>
+</tr>
+<tr class="odd">
+<td>A senha aparece na tela durante a configuração</td>
+<td>A senha nunca é exibida</td>
+</tr>
+<tr class="even">
+<td>Funções <code>mysql_*</code>, que não existem no PHP 7 ou superior</td>
+<td><code>mysqli</code>, compatível com o PHP atual</td>
+</tr>
+<tr class="odd">
+<td>O formulário pode ser reenviado e troca o banco</td>
+<td>Depois de configurado, o banco não pode ser trocado pela página</td>
+</tr>
+</tbody>
+</table>
+<p class="nota"><i class="fas fa-exclamation-triangle"></i> <strong>Limitação conhecida:</strong> qualquer pessoa com o endereço pode adicionar, editar e remover livros, como na aplicação do laboratório.</p>
+<hr />
+<p><em>Elaborado por Bruna Cristina Kato Baptista e Elizeu Elias Ribeiro.</em></p>
+
+<script>
+  // Botão "Copiar" dos blocos de código
+  document.querySelectorAll('.copiar').forEach(function (botao) {
+    botao.addEventListener('click', function () {
+      var texto = botao.parentElement.querySelector('pre').innerText;
+      navigator.clipboard.writeText(texto).then(function () {
+        botao.textContent = 'Copiado!';
+        setTimeout(function () { botao.textContent = 'Copiar'; }, 1500);
+      });
+    });
+  });
+</script>
+</body>
+</html>
