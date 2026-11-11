@@ -172,7 +172,7 @@ HTTP aos servidores web.
 24. No painel de navegação à esquerda, escolha **Grupos de segurança**.
 
 25. Selecione **Criar grupo de segurança** e configure:
-    - **Nome do grupo de segurança:** `Web Security Group`
+    - **Nome do grupo de segurança:** `Web Security Group tf`
     - **Descrição:** `Enable HTTP access`
     - **VPC:** selecione o X para remover a VPC selecionada e escolha **lab-vpc**.
 
@@ -212,7 +212,7 @@ Cada grupo exige sub-redes em pelo menos duas Zonas de Disponibilidade.
 32. No painel de navegação à esquerda, escolha **Grupos de sub-redes**.
 
 33. Escolha **Criar grupo de sub-redes de banco de dados** e configure:
-    - **Nome:** `DB-Subnet-Group`
+    - **Nome:** `DB-Subnet-Group-tf`
     - **Descrição:** `DB Subnet Group`
     - **VPC:** **lab-vpc**
 
@@ -227,7 +227,7 @@ Cada grupo exige sub-redes em pelo menos duas Zonas de Disponibilidade.
 Nesta tarefa, você criará um banco MySQL **Multi-AZ**. O RDS mantém uma instância principal e uma cópia
 sincronizada (*standby*) em outra Zona de Disponibilidade. Se a principal falhar, o RDS passa a usar a cópia.
 
-36. No painel de navegação à esquerda, escolha **Bancos de dados** e depois **Criar banco de dados**.
+36. No painel de navegação à esquerda, escolha **Bancos de dados** e depois **Criar banco de dados**. (Configuração completa)
 
 37. Em **Opções do mecanismo**, selecione **MySQL**.
 
@@ -247,11 +247,11 @@ sincronizada (*standby*) em outra Zona de Disponibilidade. Se a principal falhar
 
 43. Em **Conectividade**:
     - **Nuvem privada virtual (VPC):** **lab-vpc**
-    - **Grupo de sub-redes de banco de dados:** *db-subnet-group*
+    - **Grupo de sub-redes de banco de dados:** *db-subnet-group-tf*
     - **Acesso público:** *Não*
     - **Grupos de segurança de VPC existentes:** escolha *DB Security Group* e remova o *default*.
 
-44. Em **Monitoramento**, desmarque **Habilitar o monitoramento avançado**.
+44. Em **Monitoramento**, desmarque **Habilitar o monitoramento avançado** (Enhanced Monitoring).
 
 45. Em **Configuração adicional**:
     - **Nome do banco de dados inicial:** `livrosdb`
@@ -404,7 +404,7 @@ O balanceador, o gateway NAT e o banco Multi-AZ consomem crédito do Learner Lab
 
 72. No EC2, encerre o **Servidor Livros**.
 
-73. No RDS, exclua o **livros-db** (desmarque *Criar snapshot final*) e, depois, o **DB-Subnet-Group**.
+73. No RDS, exclua o **livros-db** (desmarque *Criar snapshot final*) e, depois, o **DB-Subnet-Group-tf**.
 
 74. Na VPC, exclua o **DB Security Group** e depois o **Web Security Group**.
 
