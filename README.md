@@ -302,7 +302,7 @@ instalará o Apache e o PHP e baixará a aplicação do GitHub, como no Lab 2.
     # Install Apache Web Server and PHP
     dnf install -y httpd wget unzip php php-mysqli
     # Download app files
-    wget https://github.com/SEU-USUARIO/livros-app/archive/refs/heads/main.zip
+    wget https://github.com/BrunaCristinaBaptista/livros-app/archive/refs/heads/main.zip
     unzip main.zip
     cp -r livros-app-main/* /var/www/html/
     # Config file for the RDS form (outside the public folder)
